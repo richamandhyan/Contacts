@@ -1,0 +1,19 @@
+<p><input type="search" ng-model='query' class="form-control"></p>
+<table class="table table-hover table-bordered">
+	<thead>
+		<tr>
+			<th ng-repeat='field in fields' ng-click='sort(field)'>{{field | labelCase}}
+			<span class="glyphicon glyphicon-chevron-up" ng-show='sort.field === field && !sort.order'></span>
+			<span class="glyphicon glyphicon-chevron-down" ng-show='sort.field === field && sort.order'></span>
+			</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat=' contact in contacts | filter: query | orderBy: sort.field : sort.order |filterKey: "$$hashKey"' >
+			<td ng-repeat ="field in fields " >
+				{{contact[field][0]}}
+			</td>
+		</tr>
+	</tbody>
+</table>
+<button class="btn btn-primary" ng-click="add()">Add New Contact</button>
